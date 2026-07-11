@@ -3,11 +3,18 @@ const { getPrices, getCoinDetail, getGlobalData } = require('../services/coingec
 
 const router = Router();
 
+let lastRateLimit = 0;
+
 router.get('/prices', async (req, res, next) => {
   try {
+    if (Date.now() - lastRateLimit < 60000) {
+      const cached = require('../services/cache').priceCache.get('top100');
+      if (cached) return res.json({ success: true, data: cached, count: cached.length });
+    }
     const prices = await getPrices();
     res.json({ success: true, data: prices, count: prices.length });
   } catch (err) {
+    if (err.message.includes('429')) lastRateLimit = Date.now();
     next(err);
   }
 });

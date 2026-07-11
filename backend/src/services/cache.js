@@ -1,6 +1,6 @@
 const NodeCache = require('node-cache');
 
-const priceCache = new NodeCache({ stdTTL: 30, checkperiod: 10 });
+const priceCache = new NodeCache({ stdTTL: 120, checkperiod: 30 });
 const newsCache = new NodeCache({ stdTTL: 300, checkperiod: 60 });
 const airdropCache = new NodeCache({ stdTTL: 3600, checkperiod: 120 });
 
