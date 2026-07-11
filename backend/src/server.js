@@ -14,7 +14,7 @@ const newsRoutes = require('./routes/news');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'https://cryptoagentsadp.xyz', 'https://www.cryptoagentsadp.xyz', 'https://cryptoagentsadp-api.onrender.com'];
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'https://cryptoagentsadp.xyz', 'https://www.cryptoagentsadp.xyz', 'https://cryptoagentsadp-api.onrender.com', 'https://cryptoagentsadp-all.onrender.com'];
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(morgan('dev'));
 app.use(express.json());
