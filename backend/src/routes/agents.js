@@ -1,0 +1,28 @@
+const { Router } = require('express');
+
+const router = Router();
+
+const AGENTS = [
+  { id: 1, name: 'Autonolas', description: 'Decentralized network for autonomous AI agents — build, deploy, and monetize agent services', category: 'Automation', use_case: 'Autonomous agent deployment and orchestration across multiple blockchains', pricing: 'Free + Gas', platform: 'Multi-chain', link: 'https://olas.network', rating: 4.7 },
+  { id: 2, name: 'Fetch.ai', description: 'Open platform for AI agent-based automation — agents negotiate and execute tasks autonomously', category: 'Trading Bots', use_case: 'Autonomous trading, supply chain optimization, and DeFi automation', pricing: 'Free + FET token', platform: 'Fetch.ai L1', link: 'https://fetch.ai', rating: 4.5 },
+  { id: 3, name: 'SingularityNET', description: 'Decentralized marketplace for AI services — access and monetize AI algorithms', category: 'Research', use_case: 'AI model marketplace, data analysis, and machine learning as a service', pricing: 'Pay-per-use AGIX', platform: 'Multi-chain', link: 'https://singularitynet.io', rating: 4.3 },
+  { id: 4, name: 'Bittensor', description: 'Open-source protocol for decentralized ML training — miners and validators earn TAO', category: 'Analytics', use_case: 'Decentralized machine learning training and inference at scale', pricing: 'Stake TAO', platform: 'Bittensor', link: 'https://bittensor.com', rating: 4.8 },
+  { id: 5, name: 'Cortex', description: 'Decentralized AI inference on blockchain — run ML models in smart contracts', category: 'Analytics', use_case: 'On-chain AI inference, predictive analytics, and model execution', pricing: 'Pay-per-inference CTXC', platform: 'Cortex', link: 'https://cortexlabs.ai', rating: 3.9 },
+  { id: 6, name: 'Render Network', description: 'Decentralized GPU rendering network for AI workloads — compute power on demand', category: 'Research', use_case: 'Distributed GPU compute for AI training, 3D rendering, and video processing', pricing: 'Pay-per-compute RNDR', platform: 'Solana + Polygon', link: 'https://rendertoken.com', rating: 4.6 },
+  { id: 7, name: 'Akash Network', description: 'Decentralized cloud marketplace for AI compute — deploy containers at lower cost', category: 'Automation', use_case: 'Decentralized cloud hosting for AI model serving and compute workloads', pricing: 'Pay-as-you-go AKT', platform: 'Akash', link: 'https://akash.network', rating: 4.4 },
+  { id: 8, name: 'Numeraire', description: 'Hedge fund tournament powered by AI predictions — compete and earn NMR', category: 'Trading Bots', use_case: 'AI-powered hedge fund prediction tournament with staking mechanism', pricing: 'Stake NMR', platform: 'Ethereum', link: 'https://numer.ai', rating: 4.2 },
+  { id: 9, name: 'Ocean Protocol', description: 'Decentralized data exchange for AI — monetize and access private data for AI training', category: 'Research', use_case: 'Data marketplace for AI training datasets with privacy-preserving compute', pricing: 'Pay-per-dataset OCEAN', platform: 'Multi-chain', link: 'https://oceanprotocol.com', rating: 4.1 },
+  { id: 10, name: 'Paal AI', description: 'AI-powered crypto assistant and trading bot — natural language portfolio management', category: 'Trading Bots', use_case: 'Telegram-based AI trading bot with sentiment analysis and automated strategies', pricing: 'Free + PAAL premium', platform: 'Telegram + Web', link: 'https://paalai.io', rating: 4.0 },
+  { id: 11, name: 'Allora Network', description: 'Decentralized AI prediction market — collective intelligence for crypto forecasting', category: 'Analytics', use_case: 'Crypto price prediction marketplace with AI-generated forecasts', pricing: 'Stake ALLORA', platform: 'Allora', link: 'https://allora.network', rating: 4.5 },
+  { id: 12, name: 'Ritual', description: 'AI co-processor for smart contracts — integrate ML models into any dApp', category: 'Automation', use_case: 'On-chain AI co-processor enabling ML-powered smart contract logic', pricing: 'Pay-per-query RIT', platform: 'Multi-chain', link: 'https://ritual.net', rating: 4.3 },
+  { id: 13, name: 'MyShell', description: 'Platform for creating and deploying custom AI agents — no-code agent builder', category: 'Research', use_case: 'Create, train, and deploy custom AI agents with no-code tools', pricing: 'Free + Premium SHELL', platform: 'Multi-chain', link: 'https://myshell.ai', rating: 4.2 },
+  { id: 14, name: 'Hivemapper', description: 'Decentralized mapping network using AI — dashcams train computer vision models', category: 'Analytics', use_case: 'Decentralized mapping and computer vision AI with token incentives', pricing: 'Hardware + HONEY', platform: 'Solana', link: 'https://hivemapper.com', rating: 4.4 },
+  { id: 15, name: 'io.net', description: 'Decentralized GPU compute cluster for AI — access thousands of GPUs on demand', category: 'Automation', use_case: 'Distributed GPU cluster for machine learning training and inference', pricing: 'Compute credits IO', platform: 'Solana', link: 'https://io.net', rating: 4.6 },
+  { id: 16, name: 'Gensyn', description: 'Decentralized machine learning compute network — train models across global hardware', category: 'Research', use_case: 'Decentralized ML training network connecting compute suppliers and developers', pricing: 'Pay-per-compute GNS', platform: 'Gensyn', link: 'https://gensyn.ai', rating: 4.1 }
+];
+
+router.get('/agents', (req, res) => {
+  res.json({ success: true, data: AGENTS, count: AGENTS.length });
+});
+
+module.exports = router;

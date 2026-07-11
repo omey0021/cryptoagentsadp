@@ -1,0 +1,34 @@
+const { Router } = require('express');
+const { airdropCache } = require('../services/cache');
+
+const router = Router();
+
+const AIRDROPS = [
+  { id: 1, name: 'zkSync Era', description: 'ZK-rollup scaling solution for Ethereum — massive ecosystem airdrop for early users and developers', chain: 'Ethereum', status: 'active', estimated_value: 2500, steps: ['Bridge ETH to zkSync', 'Use ecosystem dApps', 'Provide liquidity on SyncSwap', 'Mint zkSync native NFTs'], start_date: '2026-06-15', end_date: '2026-08-15', link: 'https://zksync.io', logo: 'https://cryptologos.cc/logos/zksync-era-logo.png' },
+  { id: 2, name: 'LayerZero', description: 'Omnichain interoperability protocol — rewarding cross-chain activity and ZRO stakers', chain: 'Multi-chain', status: 'active', estimated_value: 5000, steps: ['Bridge tokens across supported chains', 'Use Stargate Finance', 'Supply liquidity on LayerZero-based DEXs', 'Hold ZRO token'], start_date: '2026-06-01', end_date: '2026-09-01', link: 'https://layerzero.network', logo: 'https://cryptologos.cc/logos/layerzero-logo.png' },
+  { id: 3, name: 'StarkNet', description: 'Validity-rollup L2 for Ethereum — STRK token distribution to early adopters and developers', chain: 'Ethereum', status: 'active', estimated_value: 1800, steps: ['Deploy contracts on StarkNet', 'Use StarkNet dApps', 'Bridge to StarkNet', 'Participate in StarkNet DeFi'], start_date: '2026-05-01', end_date: '2026-10-01', link: 'https://starknet.io', logo: 'https://cryptologos.cc/logos/starknet-logo.png' },
+  { id: 4, name: 'Scroll', description: 'zkEVM-based L2 scaling — rewarding testnet participation and mainnet activity', chain: 'Ethereum', status: 'active', estimated_value: 1500, steps: ['Bridge ETH to Scroll', 'Use Scroll dApps', 'Provide liquidity on Scroll DEXs', 'Mint Scroll native assets'], start_date: '2026-07-01', end_date: '2026-09-30', link: 'https://scroll.io', logo: 'https://cryptologos.cc/logos/scroll-logo.png' },
+  { id: 5, name: 'Linea', description: 'ConsenSys zkEVM L2 — Voyage program points convert to token allocation', chain: 'Ethereum', status: 'active', estimated_value: 2000, steps: ['Bridge to Linea', 'Complete Linea Voyage quests', 'Use Linea ecosystem apps', 'Hold LINEA points'], start_date: '2026-06-15', end_date: '2026-12-31', link: 'https://linea.build', logo: 'https://cryptologos.cc/logos/linea-logo.png' },
+  { id: 6, name: 'Fuel', description: 'Modular execution layer — rewarding early users and testnet participants with FUEL tokens', chain: 'Ethereum', status: 'upcoming', estimated_value: 3000, steps: ['Install Fuel wallet', 'Bridge to Fuel testnet', 'Deploy contracts on Fuel', 'Use Fuel dApps'], start_date: '2026-08-01', end_date: '2026-11-01', link: 'https://fuel.network', logo: 'https://cryptologos.cc/logos/fuel-logo.png' },
+  { id: 7, name: 'Monad', description: 'High-performance EVM-compatible L1 — MON token airdrop for testnet users', chain: 'Monad', status: 'upcoming', estimated_value: 4000, steps: ['Join Monad testnet', 'Run a validator node', 'Deploy smart contracts', 'Use Monad DeFi dApps'], start_date: '2026-09-01', end_date: '2026-12-01', link: 'https://monad.xyz', logo: 'https://cryptologos.cc/logos/monad-logo.png' },
+  { id: 8, name: 'Berachain', description: 'L1 with liquidity consensus — BERA token to testnet and mainnet participants', chain: 'Berachain', status: 'upcoming', estimated_value: 3500, steps: ['Get testnet BERA from faucet', 'Provide liquidity on Berachain', 'Stake in Berachain validators', 'Participate in Berachain governance'], start_date: '2026-08-15', end_date: '2026-11-15', link: 'https://berachain.com', logo: 'https://cryptologos.cc/logos/berachain-logo.png' },
+  { id: 9, name: 'EigenLayer', description: 'Ethereum restaking protocol — EIGEN token to LRT depositors and AVS participants', chain: 'Ethereum', status: 'active', estimated_value: 2800, steps: ['Deposit LST into EigenLayer', 'Delegate to an operator', 'Participate in AVS validation', 'Hold liquid restaking tokens'], start_date: '2026-04-01', end_date: '2026-10-31', link: 'https://eigenlayer.xyz', logo: 'https://cryptologos.cc/logos/eigenlayer-logo.png' },
+  { id: 10, name: 'Base', description: 'Coinbase L2 built on OP Stack — rewarding Onchain Summer participants', chain: 'Ethereum', status: 'active', estimated_value: 1200, steps: ['Bridge to Base', 'Use Base dApps', 'Mint Base native NFTs', 'Participate in Onchain Summer'], start_date: '2026-05-01', end_date: '2026-08-30', link: 'https://base.org', logo: 'https://cryptologos.cc/logos/base-logo.png' },
+  { id: 11, name: 'Blast', description: 'L2 with native yield — BLAST airdrop for bridge and dApp users', chain: 'Ethereum', status: 'active', estimated_value: 2200, steps: ['Bridge ETH to Blast', 'Use Blast dApps', 'Earn Blast Points', 'Refer friends to Blast'], start_date: '2026-06-01', end_date: '2026-09-15', link: 'https://blast.io', logo: 'https://cryptologos.cc/logos/blast-logo.png' },
+  { id: 12, name: 'Mode', description: 'OP Stack L2 with DeFi incentives — MODE token to early users', chain: 'Ethereum', status: 'upcoming', estimated_value: 1000, steps: ['Bridge to Mode', 'Use Mode DeFi protocols', 'Stake MODE tokens', 'Participate in governance'], start_date: '2026-09-01', end_date: '2026-12-31', link: 'https://mode.network', logo: '' },
+  { id: 13, name: 'Mantle', description: 'Ethereum L2 with DAO governance — MNT staking rewards and ecosystem airdrop', chain: 'Ethereum', status: 'active', estimated_value: 1600, steps: ['Bridge to Mantle', 'Use Mantle DeFi', 'Stake MNT in Mantle LSP', 'Participate in Mantle DAO'], start_date: '2026-04-15', end_date: '2026-08-15', link: 'https://mantle.xyz', logo: 'https://cryptologos.cc/logos/mantle-logo.png' },
+  { id: 14, name: 'Taiko', description: 'ZK-rollup based on Taiko protocol — TKO airdrop to testnet contributors', chain: 'Ethereum', status: 'upcoming', estimated_value: 1700, steps: ['Run Taiko node', 'Use Taiko testnet', 'Bridge to Taiko', 'Deploy on Taiko'], start_date: '2026-10-01', end_date: '2027-01-31', link: 'https://taiko.xyz', logo: '' },
+  { id: 15, name: 'Celestia', description: 'Modular data availability network — TIA staking rewards and ecosystem airdrops', chain: 'Celestia', status: 'active', estimated_value: 3200, steps: ['Stake TIA tokens', 'Use Celestia-based rollups', 'Provide data availability', 'Participate in Celestia governance'], start_date: '2026-03-01', end_date: '2026-12-31', link: 'https://celestia.org', logo: 'https://cryptologos.cc/logos/celestia-logo.png' }
+];
+
+router.get('/airdrops', (req, res) => {
+  const cached = airdropCache.get('airdrops');
+  if (cached) {
+    return res.json({ success: true, data: cached, count: cached.length });
+  }
+
+  airdropCache.set('airdrops', AIRDROPS);
+  res.json({ success: true, data: AIRDROPS, count: AIRDROPS.length });
+});
+
+module.exports = router;
