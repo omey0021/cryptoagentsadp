@@ -9,6 +9,7 @@ import Airdrops from './pages/Airdrops'
 import Agents from './pages/Agents'
 import News from './pages/News'
 import Research from './pages/Research'
+import Login from './pages/Login'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="/agents" element={<Agents />} />
           <Route path="/news" element={<News />} />
           <Route path="/research" element={<Research />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </main>
       <Footer />

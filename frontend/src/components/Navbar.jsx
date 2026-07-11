@@ -65,6 +65,24 @@ export default function Navbar() {
             })}
           </div>
 
+          <div className="hidden md:flex items-center gap-2">
+            <Link
+              to="/login"
+              className="px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:translate-y-[-1px]"
+              style={{
+                background: 'linear-gradient(135deg, #00FFFF, #FF00FF)',
+                boxShadow: '0 4px 16px rgba(0,255,255,0.25), 0 4px 16px rgba(255,0,255,0.15)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,255,255,0.35), 0 8px 24px rgba(255,0,255,0.25)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,255,255,0.25), 0 4px 16px rgba(255,0,255,0.15)'
+              }}
+            >
+              Login
+            </Link>
+          </div>
           <button
             className="md:hidden p-2 rounded-xl glass hover:bg-white/30 transition-all"
             onClick={() => setOpen(!open)}
