@@ -8,6 +8,7 @@ import Heatmap from './pages/Heatmap'
 import Airdrops from './pages/Airdrops'
 import Agents from './pages/Agents'
 import News from './pages/News'
+import NewsSentiment from './pages/NewsSentiment'
 import Research from './pages/Research'
 import Login from './pages/Login'
 
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="/airdrops" element={<Airdrops />} />
           <Route path="/agents" element={<Agents />} />
           <Route path="/news" element={<News />} />
+          <Route path="/news-sentiment" element={<NewsSentiment />} />
           <Route path="/research" element={<Research />} />
           <Route path="/login" element={<Login />} />
         </Routes>

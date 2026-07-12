@@ -38,6 +38,7 @@ export default function Footer() {
             <h4 className="text-[#1a1a2e] font-medium mb-3 text-sm">Resources</h4>
             <div className="space-y-2 text-sm">
               <Link to="/news" className="block text-[#4a4a6a]/70 hover:text-cyan transition-colors">News</Link>
+              <Link to="/news-sentiment" className="block text-[#4a4a6a]/70 hover:text-cyan transition-colors">AI Sentiment</Link>
               <Link to="/research" className="block text-[#4a4a6a]/70 hover:text-cyan transition-colors">Research</Link>
             </div>
           </div>

@@ -41,4 +41,11 @@ export function getNews(category) {
   return handleRequest(() => api.get('/news', { params }))
 }
 
+export function getNewsSentiment(category, sentiment) {
+  const params = {}
+  if (category && category !== 'all') params.category = category
+  if (sentiment && sentiment !== 'all') params.sentiment = sentiment
+  return handleRequest(() => api.get('/news-sentiment', { params }))
+}
+
 export default api

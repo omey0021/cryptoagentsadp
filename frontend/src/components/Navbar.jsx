@@ -8,6 +8,7 @@ const links = [
   { to: '/airdrops', label: 'Airdrops' },
   { to: '/agents', label: 'AI Agents' },
   { to: '/news', label: 'News' },
+  { to: '/news-sentiment', label: 'AI Sentiment' },
   { to: '/research', label: 'Research' },
 ]
 

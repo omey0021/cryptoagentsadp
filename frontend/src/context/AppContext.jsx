@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react'
-import { getPrices, getGlobalData, getAirdrops, getAgents, getNews, getCoinDetail } from '../services/api'
+import { getPrices, getGlobalData, getAirdrops, getAgents, getNews, getCoinDetail, getNewsSentiment } from '../services/api'
 
 const AppContext = createContext()
 
@@ -12,6 +12,7 @@ export function AppProvider({ children }) {
   const [news, setNews] = useState([])
   const [globalData, setGlobalData] = useState(null)
   const [coinDetail, setCoinDetail] = useState(null)
+  const [newsSentiment, setNewsSentiment] = useState({ data: [], aggregates: { bullish: 0, bearish: 0, neutral: 0, total: 0 } })
 
   const pollingRef = useRef(null)
 
@@ -116,6 +117,7 @@ export function AppProvider({ children }) {
       news, setNews,
       globalData, setGlobalData,
       coinDetail, setCoinDetail,
+      newsSentiment, setNewsSentiment,
       fetchAllData, fetchPrices, fetchGlobalData,
       fetchAirdrops, fetchAgents, fetchNews, fetchCoinDetail
     }}>
