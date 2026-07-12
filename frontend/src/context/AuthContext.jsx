@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react'
-import { authLogin, authRegister, authMe } from '../services/api'
+import { authLogin, authRegister, authMe, authMeByToken } from '../services/api'
 
 const AuthContext = createContext()
 
@@ -33,13 +33,23 @@ export function AuthProvider({ children }) {
     return res.user
   }, [saveToken])
 
+  const loginWithToken = useCallback(async (t) => {
+    saveToken(t)
+    try {
+      const u = await authMe(t)
+      setUser(u)
+    } catch {
+      saveToken(null)
+    }
+  }, [saveToken])
+
   const logout = useCallback(() => {
     saveToken(null)
     setUser(null)
   }, [saveToken])
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, token, loading, login, register, loginWithToken, logout }}>
       {children}
     </AuthContext.Provider>
   )

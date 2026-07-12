@@ -62,4 +62,6 @@ export function authMe(token) {
   return handleRequest(() => api.get('/auth/me', { headers: { Authorization: `Bearer ${token}` } }))
 }
 
+export { authMe as authMeByToken }
+
 export default api

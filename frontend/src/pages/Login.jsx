@@ -156,6 +156,9 @@ export default function Login() {
 
   const handleWalletConnect = () => {}
 
+  const apiBase = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '' : 'https://cryptoagentsadp-api.onrender.com')
+  const baseAuthUrl = `${apiBase}/api/auth`
+
   return (
     <div className="min-h-screen flex items-center justify-center pt-24 pb-16 px-4 relative overflow-hidden">
       <FloatingOrb size="300px" top="-5%" left="-5%" delay="0" duration="8" color="rgba(0,255,255,0.5)" />
@@ -347,7 +350,7 @@ export default function Login() {
 
             <div className="flex gap-3">
               <SocialButton
-                onClick={() => {}}
+                onClick={() => window.location.href = `${baseAuthUrl}/google`}
                 label="Google"
                 icon={
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
@@ -359,7 +362,7 @@ export default function Login() {
                 }
               />
               <SocialButton
-                onClick={() => {}}
+                onClick={() => window.location.href = `${baseAuthUrl}/github`}
                 label="GitHub"
                 icon={
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">

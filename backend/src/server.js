@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
+const passport = require('passport');
 const rateLimiter = require('./middleware/rateLimiter');
 const errorHandler = require('./middleware/errorHandler');
 const marketRoutes = require('./routes/market');
@@ -28,6 +29,9 @@ app.use('/api', agentRoutes);
 app.use('/api', newsRoutes);
 app.use('/api/news-sentiment', newsSentimentRoutes);
 app.use('/api/auth', authRoutes);
+const oauthRoutes = require('./routes/oauth');
+app.use(passport.initialize());
+app.use('/api/auth', oauthRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
