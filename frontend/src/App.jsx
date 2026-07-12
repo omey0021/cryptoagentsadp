@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import PrivateRoute from './components/PrivateRoute'
 import Home from './pages/Home'
 import Market from './pages/Market'
 import Heatmap from './pages/Heatmap'
@@ -28,13 +29,13 @@ export default function App() {
       <main className="flex-1 animate-fadeIn">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/market" element={<Market />} />
-          <Route path="/heatmap" element={<Heatmap />} />
-          <Route path="/airdrops" element={<Airdrops />} />
-          <Route path="/agents" element={<Agents />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/news-sentiment" element={<NewsSentiment />} />
-          <Route path="/research" element={<Research />} />
+          <Route path="/market" element={<PrivateRoute><Market /></PrivateRoute>} />
+          <Route path="/heatmap" element={<PrivateRoute><Heatmap /></PrivateRoute>} />
+          <Route path="/airdrops" element={<PrivateRoute><Airdrops /></PrivateRoute>} />
+          <Route path="/agents" element={<PrivateRoute><Agents /></PrivateRoute>} />
+          <Route path="/news" element={<PrivateRoute><News /></PrivateRoute>} />
+          <Route path="/news-sentiment" element={<PrivateRoute><NewsSentiment /></PrivateRoute>} />
+          <Route path="/research" element={<PrivateRoute><Research /></PrivateRoute>} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </main>

@@ -50,4 +50,16 @@ export function getNewsSentiment(category, sentiment) {
   return handleRequest(() => api.get('/news-sentiment', { params }))
 }
 
+export function authLogin(email, password) {
+  return handleRequest(() => api.post('/auth/login', { email, password }))
+}
+
+export function authRegister(email, password) {
+  return handleRequest(() => api.post('/auth/register', { email, password }))
+}
+
+export function authMe(token) {
+  return handleRequest(() => api.get('/auth/me', { headers: { Authorization: `Bearer ${token}` } }))
+}
+
 export default api

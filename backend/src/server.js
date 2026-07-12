@@ -11,6 +11,7 @@ const airdropRoutes = require('./routes/airdrops');
 const agentRoutes = require('./routes/agents');
 const newsRoutes = require('./routes/news');
 const newsSentimentRoutes = require('./routes/news-sentiment');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,6 +27,7 @@ app.use('/api', airdropRoutes);
 app.use('/api', agentRoutes);
 app.use('/api', newsRoutes);
 app.use('/api/news-sentiment', newsSentimentRoutes);
+app.use('/api/auth', authRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });

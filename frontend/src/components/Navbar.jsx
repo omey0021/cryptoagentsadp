@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const links = [
   { to: '/', label: 'Home' },
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+  const { user, logout } = useAuth()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -67,22 +69,36 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-2">
-            <Link
-              to="/login"
-              className="px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:translate-y-[-1px]"
-              style={{
-                background: 'linear-gradient(135deg, #00FFFF, #FF00FF)',
-                boxShadow: '0 4px 16px rgba(0,255,255,0.25), 0 4px 16px rgba(255,0,255,0.15)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,255,255,0.35), 0 8px 24px rgba(255,0,255,0.25)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,255,255,0.25), 0 4px 16px rgba(255,0,255,0.15)'
-              }}
-            >
-              Login
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-[#4a4a6a]/70 px-3 py-1.5 rounded-xl" style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  {user.email}
+                </span>
+                <button
+                  onClick={logout}
+                  className="px-4 py-2 rounded-xl text-sm font-medium text-[#4a4a6a]/70 hover:text-[#FF4466] transition-all hover:bg-white/30"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:translate-y-[-1px]"
+                style={{
+                  background: 'linear-gradient(135deg, #00FFFF, #FF00FF)',
+                  boxShadow: '0 4px 16px rgba(0,255,255,0.25), 0 4px 16px rgba(255,0,255,0.15)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,255,255,0.35), 0 8px 24px rgba(255,0,255,0.25)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,255,255,0.25), 0 4px 16px rgba(255,0,255,0.15)'
+                }}
+              >
+                Login
+              </Link>
+            )}
           </div>
           <button
             className="md:hidden p-2 rounded-xl glass hover:bg-white/30 transition-all"
@@ -128,6 +144,17 @@ export default function Navbar() {
                 </Link>
               )
             })}
+            {user && (
+              <div className="pt-2 mt-2 space-y-1" style={{ borderTop: '1px solid rgba(255,255,255,0.15)' }}>
+                <div className="px-4 py-2 text-xs text-[#4a4a6a]/50">{user.email}</div>
+                <button
+                  onClick={() => { logout(); setOpen(false) }}
+                  className="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-[#4a4a6a]/80 hover:text-[#FF4466] hover:bg-white/30 transition-all"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

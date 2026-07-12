@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 function FloatingOrb({ size, top, left, delay, duration, color }) {
   return (
@@ -111,6 +112,11 @@ export default function Login() {
   const [showConfirm, setShowConfirm] = useState('hide')
   const [errors, setErrors] = useState({})
   const [submitting, setSubmitting] = useState(false)
+  const [apiError, setApiError] = useState('')
+  const { login, register } = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/'
 
   const toggleMode = () => {
     setMode(m => m === 'login' ? 'signup' : 'login')
@@ -129,13 +135,23 @@ export default function Login() {
     return Object.keys(e).length === 0
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!validate()) return
     setSubmitting(true)
-    setTimeout(() => {
+    setApiError('')
+    try {
+      if (mode === 'login') {
+        await login(email, password)
+      } else {
+        await register(email, password)
+      }
+      navigate(from, { replace: true })
+    } catch (err) {
+      setApiError(err.message || 'Something went wrong')
+    } finally {
       setSubmitting(false)
-    }, 1200)
+    }
   }
 
   const handleWalletConnect = () => {}
@@ -255,6 +271,12 @@ export default function Login() {
               </div>
             )}
 
+            {apiError && (
+              <div className="mb-4 px-4 py-3 rounded-xl text-sm text-red-400 text-center" style={{ background: 'rgba(255,68,102,0.1)', border: '1px solid rgba(255,68,102,0.2)' }}>
+                {apiError}
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={submitting}
@@ -364,11 +386,6 @@ export default function Login() {
                 </button>
               </p>
             )}
-            <div>
-              <Link to="/" className="text-xs text-[#4a4a6a]/40 hover:text-[#4a4a6a]/70 transition-colors">
-                Continue without account &rarr;
-              </Link>
-            </div>
           </div>
         </div>
       </div>
