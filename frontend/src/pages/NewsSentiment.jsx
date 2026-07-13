@@ -154,7 +154,7 @@ export default function NewsSentiment() {
         </div>
       </div>
 
-      {loading && !articles.length ? (
+      {localLoading && !articles.length ? (
         <div className="space-y-4 animate-fadeIn">
           {[1, 2, 3].map(i => (
             <div key={i} className="h-48 rounded-2xl animate-pulse" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.05)' }} />

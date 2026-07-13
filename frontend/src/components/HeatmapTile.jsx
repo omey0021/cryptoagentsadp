@@ -65,7 +65,10 @@ export default function HeatmapTile({ coin, maxCap, onClick }) {
           minHeight: '80px',
           transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
-      >
+>
+        {coin.image && (
+          <img src={coin.image} alt="" className="w-6 h-6 rounded-full mb-1" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }} />
+        )}
         <span
           className="font-bold uppercase leading-tight text-center"
           style={{
