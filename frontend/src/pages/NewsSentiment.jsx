@@ -77,19 +77,20 @@ function NewsCard({ article }) {
 }
 
 export default function NewsSentiment() {
-  const { newsSentiment, setNewsSentiment, loading, setLoading } = useApp()
+  const { newsSentiment, setNewsSentiment } = useApp()
+  const [localLoading, setLocalLoading] = useState(false)
   const [category, setCategory] = useState('all')
   const [sentiment, setSentiment] = useState('all')
 
   const fetchData = async (cat, sent) => {
-    setLoading(true)
+    setLocalLoading(true)
     try {
       const data = await getNewsSentiment(cat, sent)
       setNewsSentiment(data)
     } catch (err) {
       setNewsSentiment({ data: [], aggregates: { bullish: 0, bearish: 0, neutral: 0, total: 0 } })
     } finally {
-      setLoading(false)
+      setLocalLoading(false)
     }
   }
 

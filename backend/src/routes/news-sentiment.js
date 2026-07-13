@@ -41,23 +41,21 @@ const ENRICHED = NEWS.map(n => {
 
 router.get('/', async (req, res) => {
   const { category, sentiment: sentimentFilter } = req.query;
-  const cached = newsCache.get('news-sentiment');
-  if (cached) {
-    let filtered = cached;
-    if (category && category !== 'all') filtered = filtered.filter(n => n.category?.toLowerCase() === category.toLowerCase());
-    if (sentimentFilter && sentimentFilter !== 'all') filtered = filtered.filter(n => n.sentiment.label.toLowerCase() === sentimentFilter.toLowerCase());
-    const bullish = filtered.filter(n => n.sentiment.label === 'Bullish').length;
-    const bearish = filtered.filter(n => n.sentiment.label === 'Bearish').length;
-    const neutral = filtered.filter(n => n.sentiment.label === 'Neutral').length;
-    return res.json({ success: true, data: filtered, count: filtered.length, aggregates: { bullish, bearish, neutral, total: filtered.length } });
+
+  let cached = newsCache.get('news-sentiment');
+  if (!cached) {
+    newsCache.set('news-sentiment', ENRICHED);
+    cached = ENRICHED;
   }
-  let filtered = ENRICHED;
-  if (category && category !== 'all') filtered = ENRICHED.filter(n => n.category?.toLowerCase() === category.toLowerCase());
+
+  let filtered = cached;
+  if (category && category !== 'all') filtered = filtered.filter(n => n.category?.toLowerCase() === category.toLowerCase());
   if (sentimentFilter && sentimentFilter !== 'all') filtered = filtered.filter(n => n.sentiment.label.toLowerCase() === sentimentFilter.toLowerCase());
-  newsCache.set('news-sentiment', ENRICHED);
+
   const bullish = filtered.filter(n => n.sentiment.label === 'Bullish').length;
   const bearish = filtered.filter(n => n.sentiment.label === 'Bearish').length;
   const neutral = filtered.filter(n => n.sentiment.label === 'Neutral').length;
+
   res.json({ success: true, data: filtered, count: filtered.length, aggregates: { bullish, bearish, neutral, total: filtered.length } });
 });
 
