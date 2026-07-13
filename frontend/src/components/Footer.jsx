@@ -30,6 +30,7 @@ export default function Footer() {
             <h4 className="text-[#1a1a2e] font-medium mb-3 text-sm">Platform</h4>
             <div className="space-y-2 text-sm">
               <Link to="/market" className="block text-[#4a4a6a]/70 hover:text-cyan transition-colors">Market</Link>
+              <Link to="/portfolio" className="block text-[#4a4a6a]/70 hover:text-cyan transition-colors">Portfolio</Link>
               <Link to="/airdrops" className="block text-[#4a4a6a]/70 hover:text-cyan transition-colors">Airdrops</Link>
               <Link to="/agents" className="block text-[#4a4a6a]/70 hover:text-cyan transition-colors">AI Agents</Link>
             </div>

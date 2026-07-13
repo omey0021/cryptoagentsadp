@@ -30,8 +30,10 @@ app.use('/api', newsRoutes);
 app.use('/api/news-sentiment', newsSentimentRoutes);
 app.use('/api/auth', authRoutes);
 const oauthRoutes = require('./routes/oauth');
+const portfolioRoutes = require('./routes/portfolio');
 app.use(passport.initialize());
 app.use('/api/auth', oauthRoutes);
+app.use('/api', portfolioRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });

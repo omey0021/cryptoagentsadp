@@ -64,4 +64,8 @@ export function authMe(token) {
 
 export { authMe as authMeByToken }
 
+export function analyzePortfolio(body) {
+  return handleRequest(() => api.post('/portfolio', body))
+}
+
 export default api

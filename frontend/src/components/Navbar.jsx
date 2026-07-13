@@ -10,6 +10,7 @@ const links = [
   { to: '/agents', label: 'AI Agents' },
   { to: '/news', label: 'News' },
   { to: '/news-sentiment', label: 'AI Sentiment' },
+  { to: '/portfolio', label: 'Portfolio' },
   { to: '/research', label: 'Research' },
 ]
 

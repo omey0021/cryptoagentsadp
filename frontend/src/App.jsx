@@ -13,6 +13,7 @@ import NewsSentiment from './pages/NewsSentiment'
 import Research from './pages/Research'
 import Login from './pages/Login'
 import OAuthCallback from './pages/OAuthCallback'
+import Portfolio from './pages/Portfolio'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/research" element={<PrivateRoute><Research /></PrivateRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/oauth/callback" element={<OAuthCallback />} />
+          <Route path="/portfolio" element={<PrivateRoute><Portfolio /></PrivateRoute>} />
         </Routes>
       </main>
       <Footer />
