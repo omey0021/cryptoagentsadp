@@ -8,9 +8,11 @@ const links = [
   { to: '/heatmap', label: 'Heatmap' },
   { to: '/airdrops', label: 'Airdrops' },
   { to: '/agents', label: 'AI Agents' },
+  { to: '/game', label: 'Game' },
   { to: '/news', label: 'News' },
   { to: '/news-sentiment', label: 'AI Sentiment' },
   { to: '/portfolio', label: 'Portfolio' },
+  { to: '/game', label: 'Game' },
   { to: '/research', label: 'Research' },
 ]
 

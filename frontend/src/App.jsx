@@ -11,6 +11,7 @@ import Agents from './pages/Agents'
 import News from './pages/News'
 import NewsSentiment from './pages/NewsSentiment'
 import Research from './pages/Research'
+import Game from './pages/Game'
 import Login from './pages/Login'
 import OAuthCallback from './pages/OAuthCallback'
 import Portfolio from './pages/Portfolio'
@@ -41,6 +42,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/oauth/callback" element={<OAuthCallback />} />
           <Route path="/portfolio" element={<PrivateRoute><Portfolio /></PrivateRoute>} />
+          <Route path="/game" element={<PrivateRoute><Game /></PrivateRoute>} />
+          <Route path="/game" element={<PrivateRoute><Game /></PrivateRoute>} />
         </Routes>
       </main>
       <Footer />
