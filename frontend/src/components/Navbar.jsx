@@ -12,7 +12,6 @@ const links = [
   { to: '/news', label: 'News' },
   { to: '/news-sentiment', label: 'AI Sentiment' },
   { to: '/portfolio', label: 'Portfolio' },
-  { to: '/game', label: 'Game' },
   { to: '/research', label: 'Research' },
 ]
 
