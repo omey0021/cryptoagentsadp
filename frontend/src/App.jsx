@@ -41,7 +41,6 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/oauth/callback" element={<OAuthCallback />} />
           <Route path="/portfolio" element={<PrivateRoute><Portfolio /></PrivateRoute>} />
-          <Route path="/game" element={<PrivateRoute><Game /></PrivateRoute>} />
         </Routes>
       </main>
       <Footer />
